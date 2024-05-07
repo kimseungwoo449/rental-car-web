@@ -65,6 +65,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>leave</servlet-name>
+		<jsp-file>/views/user/deleteUser.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>leave</servlet-name>
+		<url-pattern>/leave</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>
@@ -98,6 +107,15 @@
 	<servlet-mapping>
 		<servlet-name>updateUserAction</servlet-name>
 		<url-pattern>/updateUserAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>deleteUserAction</servlet-name>
+		<servlet-class>rentalCarServer.user.controller.DeleteUserAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteUserAction</servlet-name>
+		<url-pattern>/deleteUserAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

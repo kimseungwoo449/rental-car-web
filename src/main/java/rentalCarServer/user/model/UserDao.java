@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
-import javax.servlet.http.HttpSession;
-
 import rentalCarServer.util.DBManager;
 import rentalCarServer.util.PasswordCrypto;
 
@@ -118,7 +116,7 @@ public class UserDao {
 		try {
 			conn = DBManager.getConnection();
 			
-			String sql = "UPDATE users SET password=?,email=?,phone=? WHERE user_id=?";
+			String sql = "UPDATE users SET password=?,email=?,phone=?,mod_date=NOW() WHERE user_id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, newPassword);
 			pstmt.setString(2, newEmail);
@@ -136,7 +134,27 @@ public class UserDao {
 		
 		return response;
 	}
-
+	
+	public boolean deleteUser(UserRequestDto userDto) {
+		UserResponseDto response = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "DELETE FROM users WHERE user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userDto.getId());
+			pstmt.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return false;
+	}
+	
 	private User findUserById(String id) {
 		User user = null;
 		try {
