@@ -64,4 +64,13 @@
 		<url-pattern>/loginAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>logoutAction</servlet-name>
+		<servlet-class>rentalCarServer.user.controller.LogoutAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>logoutAction</servlet-name>
+		<url-pattern>/logoutAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

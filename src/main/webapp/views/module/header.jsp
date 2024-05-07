@@ -25,7 +25,7 @@
 		<div id="buttons">
 			<c:choose>
 			<c:when test="${not empty sessionScope.user}">
-				<button onclick="location.href='/logoutFormAction'">로그아웃</button>
+				<button onclick="location.href='/logoutAction'">로그아웃</button>
 			</c:when>
 			<c:otherwise>
 				<button id="login" onclick="location.href='/login'">로그인페이지로 이동</button>
