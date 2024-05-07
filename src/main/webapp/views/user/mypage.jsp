@@ -8,12 +8,12 @@
 	<c:choose>
 		<c:when test="${not empty sessionScope.user}">
 			<aside>
-				<p id="reservation-check">예약확인</p>
-				<p id="modify-user-data">회원정보수정</p>
-				<p id="leave-user">회원탈퇴</p>
+				<p id="reservation-check-p">예약확인</p>
+				<p id="modify-user-data-p">회원정보수정</p>
+				<p id="leave-user-p">회원탈퇴</p>
 			</aside>
 			<section class="show-in-mypage" id="reservation-check-container">
-				<c:import url="/updateUser"></c:import>
+				<c:import url="/leave"></c:import>
 			</section>
 			<section class="show-in-mypage" id="modify-user-data-container">
 				<c:import url="/updateUser"></c:import>

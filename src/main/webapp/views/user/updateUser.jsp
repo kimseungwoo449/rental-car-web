@@ -7,7 +7,7 @@
 	<h2>회원정보변경</h2>
 	<form method="POST" action="/updateUserAction">
 		<input type="text" name="id" id="id" value="${user.id}" disabled> 
-			<input type="password" name="password" id="password" placeholder="현재 비밀번호">
+			<input type="password" name="password" id="password-update" placeholder="현재 비밀번호">
 			<input type="password" name="new-password" id="new-password" placeholder="변경할 비밀번호">
 			<input type="text" name="email" id="email" placeholder="E-MAIL [선택]">
 			<input type="hidden" name="resident-number" id="resident-number" value="${user.residentNumber}"> 
