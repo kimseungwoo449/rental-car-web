@@ -61,6 +61,27 @@ public class UserDao {
 		return null;
 	}
 	
+	public UserResponseDto login(UserRequestDto userDto) {
+		UserResponseDto response = null;
+		
+		String id = userDto.getId();
+		String password = userDto.getPassword();
+		
+		User target = findUserById(id);
+		
+		if(target==null)
+			return response;
+		
+		String encryptedPassword = target.getPassword();
+		
+		if(PasswordCrypto.decrypt(password, encryptedPassword)) {
+			response = new UserResponseDto(id, encryptedPassword, 
+					target.getEmail(), target.getResidentNumber(), target.getPhone(), target.getGender(), target.getName());
+		}
+		
+		return response;
+	}
+	
 	private User findUserById(String id) {
 		User user = null;
 		try {

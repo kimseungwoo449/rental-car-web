@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 <body>
 	<header>
 		<img src="https://cdn-icons-png.flaticon.com/128/48/48688.png"
-			id="logo">
+			id="logo" onclick="location.href='/'">
 		<div id="navs">
 			<nav id="reservation-check">예약확인</nav>
 			<nav id="board">문의게시판</nav>
@@ -22,8 +23,15 @@
 			<nav id="mypage">마이페이지</nav>
 		</div>
 		<div id="buttons">
-			<button id="login">로그인</button>
-			<button id="join">회원가입</button>
+			<c:choose>
+			<c:when test="${not empty sessionScope.user}">
+				<button onclick="location.href='/logoutFormAction'">로그아웃</button>
+			</c:when>
+			<c:otherwise>
+				<button id="login" onclick="location.href='/login'">로그인페이지로 이동</button>
+				<button id="join" onclick="location.href='/join'">회원가입</button>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	</header>
 </body>
