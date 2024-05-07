@@ -8,7 +8,23 @@ public class UserRequestDto {
 	private String phone;
 	private String gender;
 	private String name;
+
+	public UserRequestDto() {
+		
+	}
 	
+	public UserRequestDto(String id, String password, String email, String residentNumber, String phone, String gender,
+			String name) {
+		super();
+		this.id = id;
+		this.password = password;
+		this.email = email;
+		this.residentNumber = residentNumber;
+		this.phone = phone;
+		this.gender = gender;
+		this.name = name;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -36,23 +52,7 @@ public class UserRequestDto {
 	public String getName() {
 		return name;
 	}
-
-	public UserRequestDto() {
-		
-	}
 	
-	public UserRequestDto(String id, String password, String email, String residentNumber, String phone, String gender,
-			String name) {
-		super();
-		this.id = id;
-		this.password = password;
-		this.email = email;
-		this.residentNumber = residentNumber;
-		this.phone = phone;
-		this.gender = gender;
-		this.name = name;
-	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
