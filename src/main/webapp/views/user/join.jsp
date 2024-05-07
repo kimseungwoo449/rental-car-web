@@ -8,7 +8,7 @@
 <script src="/resources/script/validation-join.js"></script>
 </head>
 <body>
-	<section id="join">
+	<section id="root">
 		<h2>회원가입</h2>
 		<form method="POST" action="/joinAction">
 			<input type="text" name="id" id="id" placeholder="ID"> 
