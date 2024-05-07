@@ -47,6 +47,24 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>mypage</servlet-name>
+		<jsp-file>/views/user/mypage.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mypage</servlet-name>
+		<url-pattern>/mypage</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>updateUser</servlet-name>
+		<jsp-file>/views/user/updateUser.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateUser</servlet-name>
+		<url-pattern>/updateUser</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>
@@ -71,6 +89,15 @@
 	<servlet-mapping>
 		<servlet-name>logoutAction</servlet-name>
 		<url-pattern>/logoutAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>updateUserAction</servlet-name>
+		<servlet-class>rentalCarServer.user.controller.UpdateUserAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateUserAction</servlet-name>
+		<url-pattern>/updateUserAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
