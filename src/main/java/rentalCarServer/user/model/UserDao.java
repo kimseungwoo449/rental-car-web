@@ -6,25 +6,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import javax.servlet.http.HttpSession;
+
 import rentalCarServer.util.DBManager;
 import rentalCarServer.util.PasswordCrypto;
-
 
 public class UserDao {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	
+
 	private static UserDao instance = new UserDao();
-	
+
 	private UserDao() {
-		
+
 	}
-	
+
 	public static UserDao getInstance() {
 		return instance;
 	}
-	
+
 	public UserResponseDto createUser(UserRequestDto userDto) {
 		String id = userDto.getId();
 		String email = userDto.getEmail();
@@ -33,7 +34,7 @@ public class UserDao {
 		String password = userDto.getPassword();
 		String gender = userDto.getGender();
 		String name = userDto.getName();
-		
+
 		try {
 			conn = DBManager.getConnection();
 			String sql = "INSERT INTO users(user_id,email,resident_no,phone,password,gender,name)"
@@ -55,33 +56,87 @@ public class UserDao {
 			return new UserResponseDto(id, password, tempEmail, residentNumber, phone, gender, name);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
 		return null;
 	}
-	
+
 	public UserResponseDto login(UserRequestDto userDto) {
 		UserResponseDto response = null;
-		
+
 		String id = userDto.getId();
 		String password = userDto.getPassword();
-		
+
 		User target = findUserById(id);
-		
-		if(target==null)
+
+		if (target == null)
 			return response;
-		
+
 		String encryptedPassword = target.getPassword();
+
+		if (PasswordCrypto.decrypt(password, encryptedPassword)) {
+			response = new UserResponseDto(id, encryptedPassword, target.getEmail(), target.getResidentNumber(),
+					target.getPhone(), target.getGender(), target.getName());
+		}
+
+		return response;
+	}
+
+	public UserResponseDto updateUser(UserRequestDto curUser, String inputPassword, String newPassword, String newEmail,
+			String newPhone) {
+		UserResponseDto response = null;
+		String curId = curUser.getId();
+		String curPassword = curUser.getPassword();
+		String curEmail = curUser.getEmail();
+		String curResidentNumber = curUser.getResidentNumber();
+		String curPhone = curUser.getPhone();
+		String curGender = curUser.getGender();
+		String curName = curUser.getName();
+
+		if (!PasswordCrypto.decrypt(inputPassword, curPassword)) {
+			return response;
+		}
+
+		if (newPassword.equals("") || newPassword == null)
+			newPassword = curPassword;
+		else
+			newPassword = PasswordCrypto.encrypt(newPassword);
 		
-		if(PasswordCrypto.decrypt(password, encryptedPassword)) {
-			response = new UserResponseDto(id, encryptedPassword, 
-					target.getEmail(), target.getResidentNumber(), target.getPhone(), target.getGender(), target.getName());
+		if(newPhone.length()==11) {
+			newPhone = newPhone.substring(0,3)+"-"+newPhone.substring(3,7)+"-"+newPhone.substring(7,newPhone.length());
+		}
+		
+		if (newEmail.equals("") || newEmail == null)
+			newEmail = curEmail;
+		
+		
+		
+		if (newPhone.equals("") || newPhone == null)
+			newPhone = curPhone;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "UPDATE users SET password=?,email=?,phone=? WHERE user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, newPassword);
+			pstmt.setString(2, newEmail);
+			pstmt.setString(3, newPhone);
+			pstmt.setString(4, curId);
+			
+			pstmt.execute();
+			
+			response = new UserResponseDto(curId, newPassword, newEmail, curResidentNumber, newPhone, curGender, curName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
 		}
 		
 		return response;
 	}
-	
+
 	private User findUserById(String id) {
 		User user = null;
 		try {
@@ -110,10 +165,10 @@ public class UserDao {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
 		return user;
 	}
-	
+
 }

@@ -20,7 +20,7 @@
 			<nav id="reservation-check">예약확인</nav>
 			<nav id="board">문의게시판</nav>
 			<nav id="notice">공지사항</nav>
-			<nav id="mypage">마이페이지</nav>
+			<nav id="mypage" onclick="location.href='/mypage'">마이페이지</nav>
 		</div>
 		<div id="buttons">
 			<c:choose>
