@@ -11,11 +11,14 @@ $(document).ready(() => {
 				const title = object.title;
 				const userId = object.user_id;
 				const contents = object.contents;
+				const postNumber = object.post_no;
 				const post = document.createElement('p');
 				post.setAttribute('id','post'+i);
-				post.innerHTML+=`<span>${userId}</span><span>${title}</span>`;
+				post.innerHTML+=`<span>${userId}</span><span class="title" id=${postNumber}>${title}</span>`;
 				$('#root').append(post);
 			}
 		}
 	});
+	
+	
 })
