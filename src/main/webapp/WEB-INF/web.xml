@@ -92,6 +92,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>createBoard</servlet-name>
+		<jsp-file>/views/board/createBoard.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createBoard</servlet-name>
+		<url-pattern>/createBoard</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>
@@ -152,6 +161,15 @@
 	<servlet-mapping>
 		<servlet-name>viewTargetBoardAction</servlet-name>
 		<url-pattern>/viewTargetBoard/post</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>createBoardAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.CreateBoardAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>createBoardAction</servlet-name>
+		<url-pattern>/createBoardAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

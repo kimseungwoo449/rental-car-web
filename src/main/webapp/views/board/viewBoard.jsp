@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <c:import url="/header"></c:import>
-<script src="/resources/script/validation-view-board.js"></script>
 <body>
 	<section id="root">
 			<h1>문의사항</h1><br>		
@@ -26,7 +25,7 @@
 			</form>
 			
 			<c:if test="${not empty user}">
-				<button>글쓰기</button>
+				<button onClick="location.href='/createBoard'">글쓰기</button>
 			</c:if>
 	</section>
 </body>
