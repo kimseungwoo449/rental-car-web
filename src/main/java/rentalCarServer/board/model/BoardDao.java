@@ -184,4 +184,32 @@ public class BoardDao {
 		
 		return response;
 	}
+	
+	public BoardResponseDto updateAddminComment(BoardRequestDto boardDto) {
+		BoardResponseDto response = null;
+		
+		int postNumber =boardDto.getPostNumber();
+		String adminComment = boardDto.getAdminComment();
+		boolean isCommented = boardDto.isCommented();
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "UPDATE post SET admin_comment=?,is_commented=? WHERE post_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, adminComment);
+			pstmt.setBoolean(2, isCommented);
+			pstmt.setInt(3, postNumber);
+			
+			pstmt.execute();
+			
+			response = findBoardByPostNumber(postNumber);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return response;
+	}
 }

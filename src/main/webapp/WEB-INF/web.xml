@@ -199,4 +199,13 @@
 		<url-pattern>/updateBoardAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>adminCommentAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.AdminCommentAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>adminCommentAction</servlet-name>
+		<url-pattern>/adminCommentAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

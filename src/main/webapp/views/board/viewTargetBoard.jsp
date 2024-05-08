@@ -15,7 +15,7 @@
 			<h2>제목 : ${targetBoard.title} 작성자 : ${targetBoard.userId}</h2>
 			<h3>내용 : ${targetBoard.contents}</h3>
 			
-			<c:if test="${targetBoard.userId eq user.id}">
+			<c:if test="${targetBoard.userId eq user.id || user.id eq 'admin'}">
 				<button onClick="location.href='/deleteBoardAction'">삭제</button>
 				<button onClick="location.href='/updateBoard'">수정</button>
 			</c:if>	
@@ -23,6 +23,12 @@
 			<c:if test="${targetBoard.adminComment ne null}">
 				<h5>운영자 코멘트 : ${targetBoard.adminComment}</h5>			
 			</c:if>	
+			<c:if test="${user.id eq 'admin'}">
+				<form action="/adminCommentAction" method="POST">
+					<input type="text" name="admin-comment" id="admin-comment" placeholder="답변내용">
+					<input type="submit" value="답변하기">
+				</form>
+			</c:if>
 		</div>
 	</section>
 </body>
