@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import rentalCarServer.user.model.UserRequestDto;
 import rentalCarServer.user.model.UserResponseDto;
 import rentalCarServer.util.DBManager;
 import rentalCarServer.util.PasswordCrypto;
@@ -154,5 +155,33 @@ public class BoardDao {
 			DBManager.close(conn, pstmt);
 		}
 		return false;
+	}
+	
+	public BoardResponseDto updateBoard(BoardRequestDto boardDto) {
+		BoardResponseDto response = null;
+		
+		int postNumber =boardDto.getPostNumber();
+		String title = boardDto.getTitle();
+		String contents = boardDto.getContents();
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "UPDATE post SET title=?,contents=?,mod_date=NOW() WHERE post_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, title);
+			pstmt.setString(2, contents);
+			pstmt.setInt(3, postNumber);
+			
+			pstmt.execute();
+			
+			response = findBoardByPostNumber(postNumber);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return response;
 	}
 }

@@ -101,6 +101,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>updateBoard</servlet-name>
+		<jsp-file>/views/board/updateBoard.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateBoard</servlet-name>
+		<url-pattern>/updateBoard</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>
@@ -179,6 +188,15 @@
 	<servlet-mapping>
 		<servlet-name>deleteBoardAction</servlet-name>
 		<url-pattern>/deleteBoardAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>updateBoardAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.UpdateBoardAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>updateBoardAction</servlet-name>
+		<url-pattern>/updateBoardAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
