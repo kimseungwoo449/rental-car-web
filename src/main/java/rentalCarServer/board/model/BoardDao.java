@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,5 +137,22 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return lastPostNumber;
+	}
+
+	public boolean deleteBoardByPostNumber(int postNumber) {
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "DELETE FROM post WHERE post_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNumber);
+			pstmt.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		return false;
 	}
 }

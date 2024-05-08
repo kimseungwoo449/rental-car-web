@@ -1,29 +1,27 @@
 package rentalCarServer.board.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
-
 import rentalCarServer.board.model.BoardDao;
 import rentalCarServer.board.model.BoardResponseDto;
 
 /**
- * Servlet implementation class ViewTargetBoardAction
+ * Servlet implementation class DeleteBoardAction
  */
-
-public class ViewTargetBoardAction extends HttpServlet {
+@WebServlet("/DeleteBoardAction")
+public class DeleteBoardAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewTargetBoardAction() {
+    public DeleteBoardAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +31,17 @@ public class ViewTargetBoardAction extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
-		String strPostNum = request.getParameter("post_no");
-		int postNumber = Integer.parseInt(strPostNum);
-		
-		
-		BoardDao boardDao = BoardDao.getInstance();
-		BoardResponseDto targetBoard = boardDao.findBoardByPostNumber(postNumber);
 		HttpSession session = request.getSession();
-		session.setAttribute("targetBoard", targetBoard);
-		response.sendRedirect("/viewTargetBoard");
+		BoardResponseDto targetBoard = (BoardResponseDto)session.getAttribute("targetBoard");
+		System.out.println(targetBoard);
 		
+		int postNumber = targetBoard.getPostNumber();
+		System.out.println(postNumber);
+		BoardDao boardDao = BoardDao.getInstance();
+		if(boardDao.deleteBoardByPostNumber(postNumber)) {
+			response.sendRedirect("/board");
+		}else {
+			response.sendRedirect("/board");
+		}
 	}
 }

@@ -16,8 +16,8 @@
 			<h3>내용 : ${targetBoard.contents}</h3>
 			
 			<c:if test="${targetBoard.userId eq user.id}">
-				<button>삭제</button>
-				<button>수정</button>
+				<button onClick="location.href='/deleteBoardAction'">삭제</button>
+				<button onClick="location.href='/updateBoard'">수정</button>
 			</c:if>	
 			
 			<c:if test="${targetBoard.adminComment ne null}">

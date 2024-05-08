@@ -172,4 +172,13 @@
 		<url-pattern>/createBoardAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>deleteBoardAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.DeleteBoardAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteBoardAction</servlet-name>
+		<url-pattern>/deleteBoardAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
