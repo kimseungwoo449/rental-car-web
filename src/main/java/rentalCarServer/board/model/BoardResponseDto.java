@@ -71,7 +71,7 @@ public class BoardResponseDto {
 		this.adminComment = adminComment;
 	}
 
-	public boolean isCommented() {
+	public boolean getIsCommented() {
 		return isCommented;
 	}
 
@@ -95,7 +95,7 @@ public class BoardResponseDto {
 		this.modDate = modDate;
 	}
 
-	public boolean isNotice() {
+	public boolean getIsNotice() {
 		return isNotice;
 	}
 
@@ -103,5 +103,9 @@ public class BoardResponseDto {
 		this.isNotice = isNotice;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("post_no : %d, user_id : %s, title : %s, contents : %s, adminComment : %s, isComment : %b", postNumber, userId, title, contents, adminComment, isCommented);
+	}
 	
 }

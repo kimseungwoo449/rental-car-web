@@ -79,7 +79,16 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>viewBoard</servlet-name>
-		<url-pattern>/board</url-pattern>
+		<url-pattern>/boardlist</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>viewTargetBoard</servlet-name>
+		<jsp-file>/views/board/viewTargetBoard.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewTargetBoard</servlet-name>
+		<url-pattern>/viewTargetBoard</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -128,12 +137,21 @@
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>allBoard</servlet-name>
+		<servlet-name>allBoardAction</servlet-name>
 		<servlet-class>rentalCarServer.board.controller.AllBoardAction</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>allBoard</servlet-name>
-		<url-pattern>/allBoard</url-pattern>
+		<servlet-name>allBoardAction</servlet-name>
+		<url-pattern>/board</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>viewTargetBoardAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.ViewTargetBoardAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewTargetBoardAction</servlet-name>
+		<url-pattern>/viewTargetBoard/post</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

@@ -59,4 +59,36 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
+	public BoardResponseDto findBoardByPostNumber(int postNumber) {
+		BoardResponseDto board =null;
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE `post_no` =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNumber);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String userId =rs.getString(2);
+				String title =rs.getString(3);
+				String contents =rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice =rs.getBoolean(9);
+				
+				board = new BoardResponseDto(postNumber, userId, title, contents, adminComment, isCommented, postDate, modDate, isNotice);
+			}
+			return board;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt,rs);
+		}
+		return board;
+	}
 }
