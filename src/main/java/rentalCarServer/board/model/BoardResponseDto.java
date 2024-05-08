@@ -1,6 +1,6 @@
 package rentalCarServer.board.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class BoardResponseDto {
 	private int postNumber;

@@ -1,6 +1,6 @@
 package rentalCarServer.board.model;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class BoardRequestDto {
 	private int postNumber;
@@ -102,6 +102,4 @@ public class BoardRequestDto {
 	public void setNotice(boolean isNotice) {
 		this.isNotice = isNotice;
 	}
-	
-	
 }
