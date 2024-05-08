@@ -33,7 +33,6 @@ public class DeleteBoardAction extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		BoardResponseDto targetBoard = (BoardResponseDto)session.getAttribute("targetBoard");
-		System.out.println(targetBoard);
 		
 		int postNumber = targetBoard.getPostNumber();
 		System.out.println(postNumber);
