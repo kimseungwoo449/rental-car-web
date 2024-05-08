@@ -208,4 +208,13 @@
 		<url-pattern>/adminCommentAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>searchBoardAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.SearchBoardAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchBoardAction</servlet-name>
+		<url-pattern>/searchBoardAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

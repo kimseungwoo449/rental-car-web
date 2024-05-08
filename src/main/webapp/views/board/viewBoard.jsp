@@ -14,14 +14,15 @@
 				</c:if>
 			</c:forEach>
 			
-			<form action="">
-				<select name="" id="selectOption">
-		            <option disabled selected value="none">통합검색</option>
+			<form method="POST" action="/searchBoardAction" id="search-board">
+				<select name="search-option" id="selectOption">
+		            <option disabled selected value="title">통합검색</option>
 		            <option value="title">제목</option>
-		            <option value="publisher">출판사</option>
-		            <option value="person">인명</option>
-		            <option value="isbn">ISBN</option>
+		            <option value="userId">작성자</option>
+		            <option value="isCommented">운영자 답변여부</option>
        			</select>
+       			<input type="text" name="search-value" id="search-value" placeholder="검색할 내용">
+       			<input type="submit" value="검색하기">
 			</form>
 			
 			<c:if test="${not empty user}">
