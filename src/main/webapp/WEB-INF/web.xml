@@ -74,6 +74,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>allCarView</servlet-name>
+		<jsp-file>/views/car/allCarView.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>allCarView</servlet-name>
+		<url-pattern>/allCarView</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>
@@ -118,4 +127,12 @@
 		<url-pattern>/deleteUserAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>viewCarAction</servlet-name>
+		<servlet-class>rentalCarServer.car.controller.ViewCarAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewCarAction</servlet-name>
+		<url-pattern>/viewCarAction</url-pattern>
+	</servlet-mapping>
 </web-app>
