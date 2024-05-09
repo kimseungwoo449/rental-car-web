@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,13 +31,18 @@ public class AllBoardAction extends HttpServlet {
 		BoardDao boardDao = BoardDao.getInstance();
 		List<BoardResponseDto> list = boardDao.viewAllBoard();
 		
-		request.setAttribute("boardlist", list);
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("boardlist", list);
+		session.setAttribute("pageStatus", "board");
+		response.sendRedirect("/board");
 		
 		// JSP 내장 객체를 활용한 페이지 이동처리
 		// 1) response.sendRedirect(패스)	 : 순수 페이지 이동 
 		// 2) request.getRequestDispatcher(패스).forward(req, res) : 객체 전달과 함께 url의 변화가 없음 
 		
-		request.getRequestDispatcher("/boardlist").forward(request, response);
+//		request.setAttribute("boardlist", list);
+//		request.getRequestDispatcher("/boardlist").forward(request, response);
 
 //		JSONArray oArray = new JSONArray();
 //		for (int i = 0; i < list.size(); i++) {
