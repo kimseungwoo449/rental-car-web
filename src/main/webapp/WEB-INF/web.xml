@@ -135,4 +135,13 @@
 		<servlet-name>viewCarAction</servlet-name>
 		<url-pattern>/viewCarAction</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>searchCarAction</servlet-name>
+		<servlet-class>rentalCarServer.car.controller.SearchCarAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchCarAction</servlet-name>
+		<url-pattern>/searchCarAction</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
