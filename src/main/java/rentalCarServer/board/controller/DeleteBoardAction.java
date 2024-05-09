@@ -35,7 +35,6 @@ public class DeleteBoardAction extends HttpServlet {
 		BoardResponseDto targetBoard = (BoardResponseDto)session.getAttribute("targetBoard");
 		
 		int postNumber = targetBoard.getPostNumber();
-		System.out.println(postNumber);
 		BoardDao boardDao = BoardDao.getInstance();
 		if(boardDao.deleteBoardByPostNumber(postNumber)) {
 			response.sendRedirect("/board");
