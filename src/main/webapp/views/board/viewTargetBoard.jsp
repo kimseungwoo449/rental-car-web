@@ -22,7 +22,7 @@
 			
 			<c:if test="${targetBoard.adminComment ne null}">
 				<h5>운영자 코멘트 : ${targetBoard.adminComment}</h5>			
-			</c:if>	
+			</c:if>
 			<c:if test="${user.id eq 'admin'}">
 				<form action="/adminCommentAction" method="POST">
 					<input type="text" name="admin-comment" id="admin-comment" placeholder="답변내용">

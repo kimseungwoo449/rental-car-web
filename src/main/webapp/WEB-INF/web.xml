@@ -110,6 +110,15 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>viewSearchBoard</servlet-name>
+		<jsp-file>/views/board/viewSearchBoard.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewSearchBoard</servlet-name>
+		<url-pattern>/viewSearchBoard</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>joinAction</servlet-name>
 		<servlet-class>rentalCarServer.user.controller.JoinAction</servlet-class>
 	</servlet>

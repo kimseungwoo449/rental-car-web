@@ -156,60 +156,174 @@ public class BoardDao {
 		}
 		return false;
 	}
-	
+
 	public BoardResponseDto updateBoard(BoardRequestDto boardDto) {
 		BoardResponseDto response = null;
-		
-		int postNumber =boardDto.getPostNumber();
+
+		int postNumber = boardDto.getPostNumber();
 		String title = boardDto.getTitle();
 		String contents = boardDto.getContents();
-		
+
 		try {
 			conn = DBManager.getConnection();
-			
+
 			String sql = "UPDATE post SET title=?,contents=?,mod_date=NOW() WHERE post_no=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, title);
 			pstmt.setString(2, contents);
 			pstmt.setInt(3, postNumber);
-			
+
 			pstmt.execute();
-			
+
 			response = findBoardByPostNumber(postNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
-		
+
 		return response;
 	}
-	
+
 	public BoardResponseDto updateAddminComment(BoardRequestDto boardDto) {
 		BoardResponseDto response = null;
-		
-		int postNumber =boardDto.getPostNumber();
+
+		int postNumber = boardDto.getPostNumber();
 		String adminComment = boardDto.getAdminComment();
 		boolean isCommented = boardDto.isCommented();
-		
+
 		try {
 			conn = DBManager.getConnection();
-			
+
 			String sql = "UPDATE post SET admin_comment=?,is_commented=? WHERE post_no=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, adminComment);
 			pstmt.setBoolean(2, isCommented);
 			pstmt.setInt(3, postNumber);
-			
+
 			pstmt.execute();
-			
+
 			response = findBoardByPostNumber(postNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			DBManager.close(conn, pstmt);
 		}
-		
+
+		return response;
+	}
+
+	public List<BoardResponseDto> searchBoardsByTitle(BoardRequestDto boardDto) {
+		List<BoardResponseDto> response = new ArrayList<BoardResponseDto>();
+
+		try {
+			conn = DBManager.getConnection();
+			String targetTitle = boardDto.getTitle();
+
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE title=? ORDER BY post_date DESC";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, targetTitle);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int postNumber = rs.getInt(1);
+				String userId = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice = rs.getBoolean(9);
+
+				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+						isCommented, postDate, modDate, isNotice);
+				response.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+
+		return response;
+	}
+
+	public List<BoardResponseDto> searchBoardsByUserId(BoardRequestDto boardDto) {
+		List<BoardResponseDto> response = new ArrayList<BoardResponseDto>();
+
+		try {
+			conn = DBManager.getConnection();
+			String targetUserId = boardDto.getUserId();
+
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE user_id=? ORDER BY post_date DESC";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, targetUserId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int postNumber = rs.getInt(1);
+				String userId = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice = rs.getBoolean(9);
+
+				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+						isCommented, postDate, modDate, isNotice);
+				response.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+
+		return response;
+	}
+
+	public List<BoardResponseDto> searchBoardsByIsCommented(BoardRequestDto boardDto) {
+		List<BoardResponseDto> response = new ArrayList<BoardResponseDto>();
+
+		try {
+			conn = DBManager.getConnection();
+			boolean tempBoolean = boardDto.isCommented();
+
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE is_commented=? ORDER BY post_date DESC";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setBoolean(1, tempBoolean);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int postNumber = rs.getInt(1);
+				String userId = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice = rs.getBoolean(9);
+
+				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+						isCommented, postDate, modDate, isNotice);
+				response.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+
 		return response;
 	}
 }

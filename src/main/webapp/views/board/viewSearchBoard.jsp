@@ -8,14 +8,17 @@
 	<section id="root">
 			<h1>문의사항</h1><br>		
 			<p id="index"><span>작성자명</span><span>제목</span></p>
-			<c:forEach var="board" items="${boardlist}">
-				<c:if test="${board.isNotice ne true}">
-					<h4>${board.userId}  <a href="http://localhost:8080/viewTargetBoard/post?post_no=${board.postNumber}">${board.title}</a></h4>
-				</c:if>
-			</c:forEach>
+			
+			<c:if test="${targetBoardList ne null}">
+				<c:forEach var="board" items="${targetBoardList}">
+					<c:if test="${board.isNotice ne true}">
+						<h4>${board.userId}  <a href="http://localhost:8080/viewTargetBoard/post?post_no=${board.postNumber}">${board.title}</a></h4>
+					</c:if>
+				</c:forEach>			
+			</c:if>
 			
 			<form method="POST" action="/searchBoardAction" id="search-board">
-				<select name="search-option" id="search-Option">
+				<select name="search-option" id="selectOption">
 		            <option selected value="title">통합검색</option>
 		            <option value="title">제목</option>
 		            <option value="userId">작성자</option>
