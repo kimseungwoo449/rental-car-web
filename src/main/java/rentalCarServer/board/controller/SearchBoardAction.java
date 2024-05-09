@@ -43,7 +43,13 @@ public class SearchBoardAction extends HttpServlet {
 		BoardRequestDto boardDto = new BoardRequestDto();
 
 		List<BoardResponseDto> targetBoardList = null;
-
+		
+		if(searchOption==null) {
+			boardDto.setTitle(value);
+			targetBoardList = boardDao.searchBoardsByTitle(boardDto);
+			response.sendRedirect("/viewSearchNotice");
+		}
+		
 		if (searchOption.equals("isCommented")) {
 			boardDto.setCommented(true);
 			targetBoardList = boardDao.searchBoardsByIsCommented(boardDto);

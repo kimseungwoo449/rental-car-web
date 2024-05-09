@@ -1,6 +1,8 @@
 package rentalCarServer.board.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,15 +14,16 @@ import rentalCarServer.board.model.BoardDao;
 import rentalCarServer.board.model.BoardResponseDto;
 
 /**
- * Servlet implementation class DeleteBoardAction
+ * Servlet implementation class AllNoticeAction
  */
-public class DeleteBoardAction extends HttpServlet {
+@WebServlet("/AllNoticeAction")
+public class AllNoticeAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteBoardAction() {
+    public AllNoticeAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,18 +33,23 @@ public class DeleteBoardAction extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		BoardResponseDto targetBoard = (BoardResponseDto)session.getAttribute("targetBoard");
-		
-		int postNumber = targetBoard.getPostNumber();
+
 		BoardDao boardDao = BoardDao.getInstance();
-		boardDao.deleteBoardByPostNumber(postNumber);
+		List<BoardResponseDto> list = boardDao.viewAllBoard();
 		
-		String pageStatus = (String)session.getAttribute("pageStatus");
+		HttpSession session = request.getSession();
 		
-		if(pageStatus.equals("board"))
-			response.sendRedirect("/allBoardAction");
-		else
-			response.sendRedirect("/allNoticeAction");
+		session.setAttribute("boardlist", list);
+		session.setAttribute("pageStatus", "notice");
+		response.sendRedirect("/notice");
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }

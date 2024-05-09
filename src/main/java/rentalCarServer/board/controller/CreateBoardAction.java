@@ -31,16 +31,20 @@ public class CreateBoardAction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+		String pageStatus = (String)session.getAttribute("pageStatus");
 		
 		String title = request.getParameter("title");
 		String contents = request.getParameter("contents");
 		
 		if(title==null||title.equals("")||contents==null||contents.equals("")) {
-			response.sendRedirect("/board");
+			if(pageStatus.equals("board"))
+				response.sendRedirect("/allBoardAction");
+			else
+				response.sendRedirect("/allNoticeAction");
 		}else {
 			BoardDao boardDao = BoardDao.getInstance();
 			
-			HttpSession session = request.getSession();
 			UserResponseDto user = (UserResponseDto)session.getAttribute("user");
 			
 			String userId = user.getId();
@@ -52,7 +56,10 @@ public class CreateBoardAction extends HttpServlet {
 			
 			boardDao.createBoard(boardDto);
 			
-			response.sendRedirect("/board");
+			if(pageStatus.equals("board"))
+				response.sendRedirect("/allBoardAction");
+			else
+				response.sendRedirect("/allNoticeAction");
 		}
 	}
 

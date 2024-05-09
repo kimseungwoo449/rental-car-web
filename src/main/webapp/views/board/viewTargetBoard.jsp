@@ -9,7 +9,6 @@
 		<c:redirect url="/board"></c:redirect>
 	</c:if>
 	<section id="root">
-		<h1>문의사항</h1>
 		<div id="text-header">
 			<h4>작성일 : ${targetBoard.postDate}		수정일 : ${targetBoard.modDate}</h4>
 			<h2>제목 : ${targetBoard.title} 작성자 : ${targetBoard.userId}</h2>

@@ -79,7 +79,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>viewBoard</servlet-name>
-		<url-pattern>/boardlist</url-pattern>
+		<url-pattern>/board</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -116,6 +116,24 @@
 	<servlet-mapping>
 		<servlet-name>viewSearchBoard</servlet-name>
 		<url-pattern>/viewSearchBoard</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>viewNotice</servlet-name>
+		<jsp-file>/views/board/viewNotice.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewNotice</servlet-name>
+		<url-pattern>/notice</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>viewSearchNotice</servlet-name>
+		<jsp-file>/views/board/viewSearchNotice.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewSearchNotice</servlet-name>
+		<url-pattern>/viewSearchNotice</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -169,7 +187,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>allBoardAction</servlet-name>
-		<url-pattern>/board</url-pattern>
+		<url-pattern>/allBoardAction</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -224,6 +242,15 @@
 	<servlet-mapping>
 		<servlet-name>searchBoardAction</servlet-name>
 		<url-pattern>/searchBoardAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>allNoticeAction</servlet-name>
+		<servlet-class>rentalCarServer.board.controller.AllNoticeAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>allNoticeAction</servlet-name>
+		<url-pattern>/allNoticeAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
