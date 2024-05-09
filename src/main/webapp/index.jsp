@@ -5,7 +5,7 @@
 <html>
 <c:import url="/header"></c:import>
 <body>
-	<h1>HELLO</h1>
+	<c:import url="/allCarView"></c:import>
 </body>
 <c:import url="/footer"></c:import>
 </html>

@@ -15,7 +15,7 @@
 <body>
 	<header>
 		<img src="https://cdn-icons-png.flaticon.com/128/48/48688.png"
-			id="logo" onclick="location.href='/'">
+			id="logo" onclick="location.href='/viewCarAction'">
 		<div id="navs">
 			<nav id="reservation-check">예약확인</nav>
 			<nav id="board" onclick="location.href='/allBoardAction'">문의게시판</nav>
