@@ -169,7 +169,8 @@
 				</c:forEach>
 			</div>		
 		</c:if>
-		<form action="/searchCarAction">
+		
+		<form action="/searchCarAction" id="search-car">
 			<select name="search-option" id="search-option">
 				<option value="category" selected>차량크기</option>
 				<option value="car-name">브랜드 및 차량명</option>

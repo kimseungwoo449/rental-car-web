@@ -40,18 +40,20 @@ public class SearchCarAction extends HttpServlet {
 		
 		CarDao carDao = CarDao.getInstance();
 		
-		if(searchValue==null||searchValue.equals(""))
-			response.sendRedirect("/");
-		
-		if(searchOption.equals("category")) {
-			int categoryNumber = Integer.parseInt(searchValue);
-			list = carDao.findCarsByCategory(categoryNumber);
-		}else if(searchOption.equals("car-name")) {
-			list = carDao.findCarsByCarName(searchValue);			
-		}else if(searchOption.equals("passengers-number")) {
-			int minimumPassengers = Integer.parseInt(searchValue);
-			list = carDao.findCarsByMinimumPassengers(minimumPassengers);			
+		if(searchValue==null||searchValue.equals("")) {
+			System.out.println("null");
+		}else {
+			if(searchOption.equals("category")) {
+				int categoryNumber = Integer.parseInt(searchValue);
+				list = carDao.findCarsByCategory(categoryNumber);
+			}else if(searchOption.equals("car-name")) {
+				list = carDao.findCarsByCarName(searchValue);			
+			}else if(searchOption.equals("passengers-number")) {
+				int minimumPassengers = Integer.parseInt(searchValue);
+				list = carDao.findCarsByMinimumPassengers(minimumPassengers);			
+			}			
 		}
+		
 		
 		session.setAttribute("carList", list);
 		response.sendRedirect("/");
