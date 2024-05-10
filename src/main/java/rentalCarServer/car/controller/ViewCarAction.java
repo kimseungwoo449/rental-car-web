@@ -38,6 +38,6 @@ public class ViewCarAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		session.setAttribute("carList", carList);
-		response.sendRedirect("/");
+		response.sendRedirect("/allCarView");
 	}
 }

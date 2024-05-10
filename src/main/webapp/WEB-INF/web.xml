@@ -270,6 +270,16 @@
 		<servlet-name>viewCarAction</servlet-name>
 		<url-pattern>/viewCarAction</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>searchFirstCarAction</servlet-name>
+		<servlet-class>rentalCarServer.car.controller.SearchFirstCarAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>searchFirstCarAction</servlet-name>
+		<url-pattern>/searchFirstCarAction</url-pattern>
+	</servlet-mapping>
+	
 	<servlet>
 		<servlet-name>searchCarAction</servlet-name>
 		<servlet-class>rentalCarServer.car.controller.SearchCarAction</servlet-class>
@@ -277,6 +287,15 @@
 	<servlet-mapping>
 		<servlet-name>searchCarAction</servlet-name>
 		<url-pattern>/searchCarAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>findCarByResevTimeAction</servlet-name>
+		<servlet-class>rentalCarServer.reservation.controller.FindCarByResevTimeAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>findCarByResevTimeAction</servlet-name>
+		<url-pattern>/findCarByResevTimeAction</url-pattern>
 	</servlet-mapping>
 	
 </web-app>

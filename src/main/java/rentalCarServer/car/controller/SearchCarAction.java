@@ -56,6 +56,6 @@ public class SearchCarAction extends HttpServlet {
 		
 		
 		session.setAttribute("carList", list);
-		response.sendRedirect("/");
+		response.sendRedirect("/allCarView");
 	}
 }
