@@ -165,4 +165,37 @@ public class CarDao {
 		
 		return list;
 	}
+	
+	public CarResponseDto findCarsByCarNumber(String value){
+		CarResponseDto response = null;
+		try {
+			conn = DBManager.getConnection();
+			// 쿼리할 준비
+			String sql = "SELECT * FROM cars WHERE car_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, value);
+			// 쿼리 실행
+			rs = pstmt.executeQuery();
+
+			// 튜플 읽기
+			while (rs.next()) {
+				// database의 column index는 1부터 시작함
+				String carNumber = rs.getString(1);
+				int categoryNumber = rs.getInt(2);
+				String carName = rs.getString(3);
+				int carAge = rs.getInt(4);
+				int passengersNumber = rs.getInt(5);
+				String fuelType = rs.getString(6);
+				int hourlyRentalPrice = rs.getInt(7);
+				
+				response = new CarResponseDto(carNumber, categoryNumber, carName, carAge, passengersNumber, fuelType, hourlyRentalPrice);	
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return response;
+	}
 }

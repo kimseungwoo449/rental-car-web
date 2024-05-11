@@ -65,4 +65,79 @@ public class ReservationDao {
 		}
 		return list;
 	}
+	
+	public ReservationResponseDto createReservation(ReservationRequestDto reservationDto) {
+		ReservationResponseDto response = null;
+		
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "INSERT INTO reservation (`user_id`, `car_no`, `resev_date`, `return_date`) "
+					+"VALUES(?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+
+			// sql 구문에 맵핑할 값 설정 <- column Index는 1부터! <- ?에 맵핑할것
+			pstmt.setString(1, reservationDto.getUserId());
+			pstmt.setString(2, reservationDto.getCarNumber());
+			pstmt.setTimestamp(3, reservationDto.getResevDate());
+			pstmt.setTimestamp(4, reservationDto.getReturnDate());
+
+			pstmt.execute();
+			
+			response = findReservationByReservationNumber(lastInsertReservationNumber());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		
+		return response;
+	}
+	
+	public ReservationResponseDto findReservationByReservationNumber(int reservationNumber) {
+		ReservationResponseDto reservation = null;
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT * FROM reservation WHERE `resev_no` =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reservationNumber);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String userId = rs.getString(1);
+				String carNumber = rs.getString(2);
+				Timestamp resevDate = rs.getTimestamp(4);
+				Timestamp returnDate = rs.getTimestamp(5);
+				Timestamp resevAddDate = rs.getTimestamp(6);
+				Timestamp resevModDate = rs.getTimestamp(7);
+
+				reservation = new ReservationResponseDto(userId, carNumber, reservationNumber, resevDate, returnDate, resevAddDate, resevModDate);
+			}
+			return reservation;
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return reservation;
+	}
+	
+	private int lastInsertReservationNumber() {
+		int lastReservationNumber = -1;
+		try {
+			String sql = "SELECT MAX(resev_no) FROM reservation";
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				lastReservationNumber = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return lastReservationNumber;
+	}
 }

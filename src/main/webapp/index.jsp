@@ -6,7 +6,7 @@
 <body>
 	
 	<section id="root">	
-		<form action="searchFirstCarAction" id="search-car">
+		<form action="/searchFirstCarAction" id="search-car">
 			<span>대여일</span><input type="date" name="resev-date" id="resev-date"> 
 			<span>반납일</span><input type="date" name="return-date" id="return-date"> 
 			<select name="resev-time" id="resev-time">

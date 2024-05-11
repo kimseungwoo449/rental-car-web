@@ -43,7 +43,11 @@ public class FindCarByResevTimeAction extends HttpServlet {
 		String returnDate = request.getParameter("return-date");
 		String resevTime = request.getParameter("resev-time");
 		String returnTime = request.getParameter("return-time");
-
+		
+		session.setAttribute("resevDate", resevDate);
+		session.setAttribute("returnDate", returnDate);
+		session.setAttribute("resevTime", resevTime);
+		session.setAttribute("returnTime", returnTime);
 		
 		String resevtemp = resevDate + " " + resevTime;
 		String returntemp = returnDate + " " + returnTime;
