@@ -48,7 +48,7 @@ public class SearchFirstCarAction extends HttpServlet {
 		String returnDate = request.getParameter("return-date");
 		String resevTime = request.getParameter("resev-time");
 		String returnTime = request.getParameter("return-time");
-
+		
 		
 		String resevtemp = resevDate + " " + resevTime;
 		String returntemp = returnDate + " " + returnTime;
@@ -61,6 +61,11 @@ public class SearchFirstCarAction extends HttpServlet {
 		ReservationRequestDto reservationDto = new ReservationRequestDto();
 		reservationDto.setResevDate(resevDateTime);
 		reservationDto.setReturnDate(returnDateTime);
+		
+		session.setAttribute("resevDate", resevDate);
+		session.setAttribute("returnDate", returnDate);
+		session.setAttribute("resevTime", resevTime);
+		session.setAttribute("returnTime", returnTime);
 		
 		resevList = reservationDao.createReservationList(reservationDto);
 		session.setAttribute("reservationList", resevList);

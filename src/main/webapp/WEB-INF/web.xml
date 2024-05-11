@@ -298,4 +298,40 @@
 		<url-pattern>/findCarByResevTimeAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>reservateAction</servlet-name>
+		<servlet-class>rentalCarServer.reservation.controller.ReservateAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reservateAction</servlet-name>
+		<url-pattern>/reservateAction</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>targetCarFindAction</servlet-name>
+		<servlet-class>rentalCarServer.car.controller.TargetCarFindAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>targetCarFindAction</servlet-name>
+		<url-pattern>/targetCarFindAction/targetCarNumber</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>carDetail</servlet-name>
+		<jsp-file>/views/reservation/targetCarDetail.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>carDetail</servlet-name>
+		<url-pattern>/carDetail</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>reservationComplete</servlet-name>
+		<jsp-file>/views/reservation/reservationComplete.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reservationComplete</servlet-name>
+		<url-pattern>/reservationComplete</url-pattern>
+	</servlet-mapping>
+	
 </web-app>
