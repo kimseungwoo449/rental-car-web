@@ -27,13 +27,26 @@ public class AllBoardAction extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
-		BoardDao boardDao = BoardDao.getInstance();
-		List<BoardResponseDto> list = boardDao.viewAllBoard();
 		
+		int pageCount = Integer.parseInt(request.getParameter("pageCount"));
+		
+		BoardDao boardDao = BoardDao.getInstance();
+		
+		int boardLength = boardDao.getAllBoardLength();
+		List<BoardResponseDto> pageList = boardDao.viewPageBoard(pageCount);
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("boardlist", list);
+		System.out.println("bl : "+boardLength);
+		int pages = boardLength/5;
+		
+		if(boardLength%5!=0) {
+			System.out.println("++");
+			pages++;
+		}
+		System.out.println("pages : "+pages);
+		
+		session.setAttribute("pages", pages);
+		session.setAttribute("boardlist", pageList);
 		session.setAttribute("pageStatus", "board");
 		response.sendRedirect("/board");
 		
