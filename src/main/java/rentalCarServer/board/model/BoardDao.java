@@ -29,40 +29,40 @@ public class BoardDao {
 		return instance;
 	}
 
-	public List<BoardResponseDto> viewAllBoard() {
-		List<BoardResponseDto> list = new ArrayList<BoardResponseDto>();
-
-		try {
-			conn = DBManager.getConnection();
-
-			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
-					+ "FROM post ORDER BY post_date DESC";
-			pstmt = conn.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				int postNumber = rs.getInt(1);
-				String userId = rs.getString(2);
-				String title = rs.getString(3);
-				String contents = rs.getString(4);
-				String adminComment = rs.getString(5);
-				boolean isCommented = rs.getBoolean(6);
-				Timestamp postDate = rs.getTimestamp(7);
-				Timestamp modDate = rs.getTimestamp(8);
-				boolean isNotice = rs.getBoolean(9);
-
-				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
-						isCommented, postDate, modDate, isNotice);
-				list.add(board);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			DBManager.close(conn, pstmt, rs);
-		}
-		return list;
-	}
+//	public List<BoardResponseDto> viewAllBoard() {
+//		List<BoardResponseDto> list = new ArrayList<BoardResponseDto>();
+//
+//		try {
+//			conn = DBManager.getConnection();
+//
+//			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+//					+ "FROM post ORDER BY post_date DESC";
+//			pstmt = conn.prepareStatement(sql);
+//
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				int postNumber = rs.getInt(1);
+//				String userId = rs.getString(2);
+//				String title = rs.getString(3);
+//				String contents = rs.getString(4);
+//				String adminComment = rs.getString(5);
+//				boolean isCommented = rs.getBoolean(6);
+//				Timestamp postDate = rs.getTimestamp(7);
+//				Timestamp modDate = rs.getTimestamp(8);
+//				boolean isNotice = rs.getBoolean(9);
+//
+//				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+//						isCommented, postDate, modDate, isNotice);
+//				list.add(board);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			DBManager.close(conn, pstmt, rs);
+//		}
+//		return list;
+//	}
 
 	public BoardResponseDto findBoardByPostNumber(int postNumber) {
 		BoardResponseDto board = null;
@@ -325,5 +325,123 @@ public class BoardDao {
 		}
 
 		return response;
+	}
+	
+	public int getAllBoardLength() {
+		int count = 0;
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT * FROM post WHERE NOT is_notice ORDER BY post_date DESC";
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return count;
+	}
+	
+	public int getAllNoticeLength() {
+		int count = 0;
+		try {
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT * FROM post WHERE is_notice ORDER BY post_date DESC";
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				count++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return count;
+	}
+	
+	public List<BoardResponseDto> viewPageBoard(int pageNumber) {
+		List<BoardResponseDto> list = new ArrayList<BoardResponseDto>();
+
+		try {
+			int offset = pageNumber*5 -5;
+
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE NOT is_notice ORDER BY post_date DESC LIMIT 5 OFFSET ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, offset);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int postNumber = rs.getInt(1);
+				String userId = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice = rs.getBoolean(9);
+
+				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+						isCommented, postDate, modDate, isNotice);
+				list.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+	
+	public List<BoardResponseDto> viewPageNotice(int pageNumber) {
+		List<BoardResponseDto> list = new ArrayList<BoardResponseDto>();
+
+		try {
+			int offset = pageNumber*5 -5;
+
+			conn = DBManager.getConnection();
+
+			String sql = "SELECT post_no,user_id,title,contents,admin_comment,is_commented,post_date,mod_date,is_notice "
+					+ "FROM post WHERE is_notice ORDER BY post_date DESC LIMIT 5 OFFSET ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, offset);
+			
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int postNumber = rs.getInt(1);
+				String userId = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String adminComment = rs.getString(5);
+				boolean isCommented = rs.getBoolean(6);
+				Timestamp postDate = rs.getTimestamp(7);
+				Timestamp modDate = rs.getTimestamp(8);
+				boolean isNotice = rs.getBoolean(9);
+
+				BoardResponseDto board = new BoardResponseDto(postNumber, userId, title, contents, adminComment,
+						isCommented, postDate, modDate, isNotice);
+				list.add(board);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
 	}
 }

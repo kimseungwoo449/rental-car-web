@@ -18,8 +18,8 @@
 			id="logo" onclick="location.href='/viewCarAction'">
 		<div id="navs">
 			<nav id="reservation-check">예약확인</nav>
-			<nav id="board" onclick="location.href='/allBoardAction'">문의게시판</nav>
-			<nav id="notice" onclick="location.href='/allNoticeAction'">공지사항</nav>
+			<nav id="board" onclick="location.href='/allBoardAction/pageCount?pageCount=1'">문의게시판</nav>
+			<nav id="notice" onclick="location.href='/allNoticeAction/pageCount?pageCount=1'">공지사항</nav>
 			<nav id="mypage" onclick="location.href='/mypage'">마이페이지</nav>
 		</div>
 		<div id="buttons">

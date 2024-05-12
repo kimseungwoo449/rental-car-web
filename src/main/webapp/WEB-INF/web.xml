@@ -196,7 +196,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>allBoardAction</servlet-name>
-		<url-pattern>/allBoardAction</url-pattern>
+		<url-pattern>/allBoardAction/pageCount</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
@@ -259,7 +259,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>allNoticeAction</servlet-name>
-		<url-pattern>/allNoticeAction</url-pattern>
+		<url-pattern>/allNoticeAction/pageCount</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>
