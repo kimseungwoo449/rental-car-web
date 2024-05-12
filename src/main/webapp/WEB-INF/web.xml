@@ -334,4 +334,22 @@
 		<url-pattern>/reservationComplete</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>findReservationByUserId</servlet-name>
+		<servlet-class>rentalCarServer.reservation.controller.FindReservationByUserId</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>findReservationByUserId</servlet-name>
+		<url-pattern>/findReservationByUserId</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>reservationCheck</servlet-name>
+		<jsp-file>/views/reservation/reservationCheck.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>reservationCheck</servlet-name>
+		<url-pattern>/reservationCheck</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

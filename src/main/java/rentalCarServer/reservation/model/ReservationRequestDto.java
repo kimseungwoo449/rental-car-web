@@ -10,6 +10,8 @@ public class ReservationRequestDto {
 	private Timestamp returnDate;
 	private Timestamp resevAddDate;
 	private Timestamp resevModDate;
+	private String carName;
+	
 	
 	public ReservationRequestDto(String userId, String carNumber, int resevNumber, Timestamp resevDate, Timestamp returnDate, Timestamp resevAddDate, Timestamp resevModDate) {
 		super();
@@ -82,5 +84,11 @@ public class ReservationRequestDto {
 		this.resevModDate = resevModDate;
 	}
 	
-	
+	public String getCarName() {
+		return carName;
+	}
+
+	public void setCarName(String carName) {
+		this.carName = carName;
+	}
 }

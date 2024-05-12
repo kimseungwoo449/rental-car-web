@@ -140,4 +140,36 @@ public class ReservationDao {
 		}
 		return lastReservationNumber;
 	}
+	
+	public List<ReservationResponseDto> findReservationByUserId(String value) {
+		List<ReservationResponseDto> list = new ArrayList<ReservationResponseDto>();
+
+		try {
+			conn = DBManager.getConnection();
+			
+			// 예약 불가 차량
+			String sql = "SELECT * FROM reservation WHERE user_id=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, value);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String userId = rs.getString(1);
+				String carNumber = rs.getString(2);
+				int resevNumber = rs.getInt(3);
+				Timestamp resevDate = rs.getTimestamp(4);
+				Timestamp returnDate = rs.getTimestamp(5);
+				Timestamp resevAddDate = rs.getTimestamp(6);
+				Timestamp resevModDate = rs.getTimestamp(7);
+				ReservationResponseDto reservation = new ReservationResponseDto(userId, carNumber, resevNumber, resevDate, returnDate, resevAddDate, resevModDate);
+				list.add(reservation);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
 }

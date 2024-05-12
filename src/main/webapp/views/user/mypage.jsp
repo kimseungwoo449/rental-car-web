@@ -5,27 +5,31 @@
 <html>
 <c:import url="/header"></c:import>
 <body>
-	<c:choose>
-		<c:when test="${not empty sessionScope.user}">
-			<aside>
-				<p id="reservation-check-p">예약확인</p>
-				<p id="modify-user-data-p">회원정보수정</p>
-				<p id="leave-user-p">회원탈퇴</p>
-			</aside>
-			<section class="show-in-mypage" id="reservation-check-container">
-				<c:import url="/leave"></c:import>
-			</section>
-			<section class="show-in-mypage" id="modify-user-data-container">
-				<c:import url="/updateUser"></c:import>
-			</section>
-			<section class="show-in-mypage" id="leave-user-container">
-				<c:import url="/leave"></c:import>
-			</section>			
-		</c:when>
-		<c:otherwise>
-			<c:redirect url="/"></c:redirect>
-		</c:otherwise>
-	</c:choose>
+	<section id="root">
+		<h2>마이 페이지</h2>
+		<c:choose>
+			<c:when test="${not empty sessionScope.user}">
+				<aside>
+					<p id="reservation-check-p">예약확인</p>
+					<p id="modify-user-data-p">회원정보수정</p>
+					<p id="leave-user-p">회원탈퇴</p>
+				</aside>
+				<section class="show-in-mypage" id="reservation-check-container">
+					<c:import url="/findReservationByUserId"></c:import>
+					<c:import url="/reservationCheck"></c:import>
+				</section>
+				<section class="show-in-mypage" id="modify-user-data-container">
+					<c:import url="/updateUser"></c:import>
+				</section>
+				<section class="show-in-mypage" id="leave-user-container">
+					<c:import url="/leave"></c:import>
+				</section>			
+			</c:when>
+			<c:otherwise>
+				<c:redirect url="/"></c:redirect>
+			</c:otherwise>
+		</c:choose>	
+	</section>
 	<script src="/resources/script/validation-mypage.js"></script>
 </body>
 <c:import url="footer"></c:import>

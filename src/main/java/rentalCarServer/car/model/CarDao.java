@@ -198,4 +198,29 @@ public class CarDao {
 		
 		return response;
 	}
+	
+	public String findCarNameByCarNumber(String value){
+		String carName = null;
+		try {
+			conn = DBManager.getConnection();
+			// 쿼리할 준비
+			String sql = "SELECT car_name FROM cars WHERE car_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, value);
+			// 쿼리 실행
+			rs = pstmt.executeQuery();
+
+			// 튜플 읽기
+			while (rs.next()) {
+				// database의 column index는 1부터 시작함
+				carName = rs.getString(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return carName;
+	}
 }

@@ -10,6 +10,8 @@ public class Reservation {
 	private Timestamp returnDate;
 	private Timestamp resevAddDate;
 	private Timestamp resevModDate;
+	private String carName;
+	
 	
 	public Reservation(String userId, String carNumber, int resevNumber, Timestamp resevDate, Timestamp returnDate, Timestamp resevAddDate, Timestamp resevModDate) {
 		super();
@@ -54,5 +56,7 @@ public class Reservation {
 		return resevModDate;
 	}
 	
-	
+	public String getCarName() {
+		return carName;
+	}	
 }
