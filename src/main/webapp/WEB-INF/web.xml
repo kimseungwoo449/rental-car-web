@@ -370,4 +370,13 @@
 		<url-pattern>/checkReservationAction</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>deleteReservationAction</servlet-name>
+		<servlet-class>rentalCarServer.reservation.controller.DeleteReservationAction</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>deleteReservationAction</servlet-name>
+		<url-pattern>/deleteReservationAction/resevNumber</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

@@ -57,7 +57,7 @@
 					<p class="resev-date">${reservation.resevDate} ~ ${reservation.returnDate} 까지</p>
 					
 					<button onclick="location.href='/updateReservationAction/resevNumber?resevNumber=${reservation.resevNumber}'">수정</button>
-					<button>취소</button>
+					<button onclick="location.href='/deleteReservationAction/resevNumber?resevNumber=${reservation.resevNumber}'">취소</button>
 				</div>
 			</c:forEach>
 		</c:otherwise>
