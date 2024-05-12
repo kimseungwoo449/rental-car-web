@@ -3,11 +3,14 @@ package rentalCarServer.reservation.model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import rentalCarServer.user.model.UserRequestDto;
+import rentalCarServer.user.model.UserResponseDto;
 import rentalCarServer.util.DBManager;
 
 public class ReservationDao {
@@ -171,5 +174,87 @@ public class ReservationDao {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return list;
+	}
+	
+	public boolean isExist(ReservationRequestDto resevDto) {
+		try {
+			conn = DBManager.getConnection();
+
+			Timestamp startDate = resevDto.getResevDate();
+			Timestamp endDate = resevDto.getReturnDate();
+			
+			// 예약 불가 차량
+			String sql = "SELECT * FROM reservation "
+					+ "WHERE car_no=? "
+					+ "AND ((resev_date<=? AND return_date>=?) "
+					+ "OR (resev_date BETWEEN ? AND ?) "
+					+ "OR (return_date BETWEEN ? AND ?)) "
+					+ "AND NOT resev_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, resevDto.getCarNumber());
+			pstmt.setTimestamp(2, startDate);
+			pstmt.setTimestamp(3, endDate);
+			pstmt.setTimestamp(4, startDate);
+			pstmt.setTimestamp(5, endDate);
+			pstmt.setTimestamp(6, startDate);
+			pstmt.setTimestamp(7, endDate);
+			pstmt.setInt(8, resevDto.getResevNumber());
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return false;
+	}
+	
+	public ReservationResponseDto updateReservation(ReservationRequestDto resevDto) {
+		ReservationResponseDto response = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "UPDATE reservation SET resev_date=?,return_date=?,resev_mod_date=NOW() WHERE resev_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setTimestamp(1, resevDto.getResevDate());
+			pstmt.setTimestamp(2, resevDto.getReturnDate());
+			pstmt.setInt(3, resevDto.getResevNumber());
+			
+			pstmt.execute();
+			
+			response = new ReservationResponseDto();
+			response.setResevDate(resevDto.getResevDate());
+			response.setReturnDate(resevDto.getReturnDate());
+			response.setResevNumber(resevDto.getResevNumber());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return response;
+	}
+	
+	public boolean deleteReservation(int reservationNumber) {
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			String sql = "DELETE FROM reservation WHERE resev_no=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,reservationNumber);
+			pstmt.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return false;
 	}
 }
