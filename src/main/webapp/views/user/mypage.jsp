@@ -5,14 +5,14 @@
 <html>
 <c:import url="/header"></c:import>
 <body>
-	<section id="root">
-		<h2>마이 페이지</h2>
+	<section id="mypage-container">
 		<c:choose>
 			<c:when test="${not empty sessionScope.user}">
-				<aside>
-					<p id="reservation-check-p">예약확인</p>
-					<p id="modify-user-data-p">회원정보수정</p>
-					<p id="leave-user-p">회원탈퇴</p>
+				<aside id="mypage-menu">
+					<h2>마이 페이지</h2>
+					<p class="mypage-menu-p" id="reservation-check-p">예약확인</p>
+					<p class="mypage-menu-p" id="modify-user-data-p">회원정보수정</p>
+					<p class="mypage-menu-p" id="leave-user-p">회원탈퇴</p>
 				</aside>
 				<section class="show-in-mypage" id="reservation-check-container">
 					<c:import url="/findReservationByUserId"></c:import>

@@ -1,10 +1,8 @@
-@charset "UTF-8";
-
 @import url("reset-css.css");
 
 body {
 	display: grid;
-	grid-template-rows:10% auto 10%;
+	grid-template-rows: 100px auto 100px;
 	min-height: 100vh;
 }
 
@@ -12,27 +10,106 @@ header, section, footer {
 	padding: 20px 10px;
 }
 
+/* header */
 header {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
 	width: 70%;
 	margin: auto;
-	align-items: center;
+	margin-bottom: 20px; /* 헤더 아래 여백 추가 */
 }
 
-header>#navs {
+#navs {
 	display: flex;
 	gap: 10px;
 }
 
-header>#navs>nav {
+#navs>nav {
 	margin: 10px;
+	cursor: pointer; /* 마우스 커서를 포인터로 변경하여 사용자에게 클릭 가능한 요소임을 나타냄 */
+}
+
+#buttons {
+	justify-self: end; /* 버튼을 오른쪽으로 정렬 */
+}
+
+.header-button {
+	padding: 8px 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #0056b3; /* 마우스 호버 시 배경색 변경 */
 }
 
 #logo {
 	height: 50px;
 }
 
+/* footer */
 footer {
 	background-color: #dee2e6;
+	text-align: center;
+	padding: 20px;
+}
+
+/* grid.css */
+/* Grid styles */
+#root {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 20px;
+	justify-items: center;
+	align-items: flex-start;
+	padding: 20px;
+}
+
+
+
+#allCarView {
+	width : 70%;
+	margin: auto;
+	display: grid;
+	/* 	flex-wrap: wrap; */
+	/* 	flex-direction: column; */
+	/* 	justify-content: space-between; */
+	grid-gap: 10px; grid-template-columns : 70% 30%;
+	grid-template-rows: 80% 20%;
+	grid-template-areas: 
+	"cars-container ffcbt" 
+	"cars-container scov";
+	grid-template-columns: 70% 30%;
+}
+
+#allCarView #cars-container {
+	grid-area: cars-container;
+}
+
+#find-car-by-time {
+	grid-area: ffcbt;
+}
+
+#search-car-option-value {
+	grid-area: scov;
+}
+
+#mypage-container{
+	display: grid;
+	grid-template-columns:30% 70%;
+	grid-template-areas:
+	"aside section"
+	;
+}
+
+#mypage-container aside{
+	grid-area : aside;
+}
+
+#mypage-container section{
+	grid-area : section;
 }

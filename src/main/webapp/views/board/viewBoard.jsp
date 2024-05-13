@@ -4,19 +4,26 @@
 <html>
 <c:import url="/header"></c:import>
 <body>
-	<section id="root">
+	<section id="board-list">
 		<h1>문의사항</h1>
 		<p id="index">
 			<span>작성자명</span><span>제목</span>
 		</p>
+		
 		<c:forEach var="board" items="${boardlist}">
-			<h4>${board.userId}
+			<p class="contents">
+				<span>${board.userId} </span>
 				<a href="http://localhost:8080/viewTargetBoard/post?post_no=${board.postNumber}">${board.title}</a>
-			</h4>
+			</p>
 		</c:forEach>
-		<c:forEach var="i" begin="1" end="${pages}">
-			<button onclick="location.href='/allBoardAction/pageCount?pageCount=${i}'">${i}</button>
-		</c:forEach>
+		<div id="buttons">
+			<c:forEach var="i" begin="1" end="${pages}">
+				<button onclick="location.href='/allBoardAction/pageCount?pageCount=${i}'">${i}</button>
+			</c:forEach>
+			<c:if test="${not empty user}">
+				<button onClick="location.href='/createBoard'">글쓰기</button>
+			</c:if>
+		</div>
 
 		<form method="POST" action="/searchBoardAction" id="search-board">
 			<select name="search-option" id="search-Option">
@@ -27,9 +34,6 @@
 			</select> <input type="text" name="search-value" id="search-value" placeholder="검색할 내용"> <input type="submit" value="검색하기">
 		</form>
 
-		<c:if test="${not empty user}">
-			<button onClick="location.href='/createBoard'">글쓰기</button>
-		</c:if>
 	</section>
 </body>
 <c:import url="/footer"></c:import>

@@ -4,12 +4,11 @@
 <html>
 <c:import url="/header"></c:import>
 <body>
-	
 	<section id="root">	
 		<form action="/searchFirstCarAction" id="search-car">
 			<span>대여일</span><input type="date" name="resev-date" id="resev-date"> 
 			<span>반납일</span><input type="date" name="return-date" id="return-date"> 
-			<select name="resev-time" id="resev-time">
+			<span>대여시작시간</span><select name="resev-time" id="resev-time">
 				<option disabled>대여시간 선택</option>
 				<option value="07:00:00">07:00</option>
 				<option value="08:00:00" selected>08:00</option>
@@ -28,7 +27,7 @@
 				<option value="21:00:00">21:00</option>
 				<option value="22:00:00">22:00</option>
 			</select> 
-			<select name="return-time" id="return-time">
+			<span>반납시간</span><select name="return-time" id="return-time">
 				<option disabled selected>반납시간 선택</option>
 				<option value="06:00:00">06:00</option>
 				<option value="07:00:00">07:00</option>

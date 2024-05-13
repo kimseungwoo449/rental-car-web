@@ -10,6 +10,7 @@
 <link rel="icon"
 	href="https://cdn-icons-png.flaticon.com/128/5670/5670281.png">
 <link rel="stylesheet" href="/resources/style/grid.css">
+<link rel="stylesheet" href="/resources/style/form.css">
 <title>KSW렌터카</title>
 </head>
 <body>
@@ -25,11 +26,11 @@
 		<div id="buttons">
 			<c:choose>
 			<c:when test="${not empty sessionScope.user}">
-				<button onclick="location.href='/logoutAction'">로그아웃</button>
+				<button class="header-button" onclick="location.href='/logoutAction'">로그아웃</button>
 			</c:when>
 			<c:otherwise>
-				<button id="login" onclick="location.href='/login'">로그인페이지로 이동</button>
-				<button id="join" onclick="location.href='/join'">회원가입</button>
+				<button class="header-button" id="login" onclick="location.href='/login'">로그인페이지로 이동</button>
+				<button class="header-button" id="join" onclick="location.href='/join'">회원가입</button>
 			</c:otherwise>
 		</c:choose>
 		</div>
